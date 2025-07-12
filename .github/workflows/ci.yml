@@ -2,23 +2,25 @@ name: CI
 
 on:
   push:
-    branches: [ master, main ]
+    branches: [master, main]
   pull_request:
-    branches: [ master, main ]
+    branches: [master, main]
 
 jobs:
-  build-and-test:
+  lint:
     runs-on: ubuntu-latest
-
+    strategy:
+      matrix:
+        node: [18, 20]
     steps:
       - name: Checkout
         uses: actions/checkout@v4
 
-      - name: Use Node.js 20
+      - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: 'npm'
+          node-version: ${{ matrix.node }}
+          cache: npm
 
       - name: Install dependencies
         run: npm ci
@@ -26,19 +28,35 @@ jobs:
       - name: Prettier check
         run: npm run format:check
 
-      - name: ESLint
-        run: npm run lint
+      - name: ESLint (no warnings)
+        run: npm run lint:ci
 
-      - name: Unit tests
-        run: npm test
+  test:
+    needs: lint
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node: [18, 20]
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
 
-      - name: Coverage (report + HTML)
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Unit tests (with coverage thresholds)
         run: npm run coverage
 
-      - name: Upload coverage report
+      - name: Upload coverage HTML
         if: always()
         uses: actions/upload-artifact@v4
         with:
-          name: coverage-html
+          name: coverage-html-node-${{ matrix.node }}
           path: coverage
           if-no-files-found: warn
