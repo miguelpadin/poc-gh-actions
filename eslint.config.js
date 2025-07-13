@@ -39,8 +39,8 @@ export default [
   // Ajustes finos
   {
     rules: {
-      "no-undef": "off",       // TS ya gestiona tipos/defs
-      "no-unused-vars": "warn" // señal útil sin romper build
+      "no-undef": "off", // TS ya gestiona tipos/defs
+      "no-unused-vars": "warn", // señal útil sin romper build
     },
   },
 ];
