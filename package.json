@@ -37,5 +37,8 @@
     "vitest": "^4.0.8",
     "vue-eslint-parser": "^10.2.0",
     "vue-tsc": "^3.1.0"
+  },
+  "engines": {
+    "node": ">=20"
   }
 }
