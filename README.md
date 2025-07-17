@@ -14,3 +14,5 @@ The GitHub Actions workflow runs the following steps, in order:
 
 > Note: The coverage badge is static (local result).  
 > For dynamic coverage per commit/PR, integrate **Codecov** or **Coveralls** later.
+
+<!-- CI trigger: minor README tweak -->
