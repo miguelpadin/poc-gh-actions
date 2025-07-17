@@ -1,7 +1,10 @@
+// eslint.config.js
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import vue from "eslint-plugin-vue";
 import vueParser from "vue-eslint-parser";
+// Desactiva reglas que chocan con Prettier
+import eslintConfigPrettier from "eslint-config-prettier";
 
 export default [
   // Ignorados (sustituye .eslintignore)
@@ -36,11 +39,14 @@ export default [
   ...tseslint.configs.recommended,
   ...vue.configs["flat/strongly-recommended"],
 
-  // Ajustes finos
+  // Ajustes finos del proyecto
   {
     rules: {
-      "no-undef": "off", // TS ya gestiona tipos/defs
-      "no-unused-vars": "warn", // señal útil sin romper build
+      "no-undef": "off",
+      "no-unused-vars": "warn",
     },
   },
+
+  // ¡Muy importante! Colocar al FINAL
+  eslintConfigPrettier,
 ];
