@@ -14,7 +14,8 @@
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
-    "coverage": "vitest run --coverage"
+    "coverage": "vitest run --coverage",
+    "lint:ci": "eslint . --max-warnings=0"
   },
   "dependencies": {
     "vue": "^3.5.22"
