@@ -1,7 +1,7 @@
 # poc-gh-actions
 
 [![CI](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg)](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml)
-![coverage](<https://img.shields.io/badge/coverage-local%20(vitest)-blue>)
+[![Coverage](https://codecov.io/gh/miguelpadin/poc-gh-actions/branch/main/graph/badge.svg)](https://codecov.io/gh/miguelpadin/poc-gh-actions)
 
 ## CI Pipeline
 
