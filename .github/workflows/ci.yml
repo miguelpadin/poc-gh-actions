@@ -7,52 +7,61 @@ on:
     branches: [master, main]
 
 jobs:
-  lint:
+  format:
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        node: [20]
+      matrix: { node: [20] }
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: npm
-
       - name: Install dependencies
         run: npm ci
-
       - name: Prettier check
         run: npm run format:check
 
+  lint:
+    needs: format
+    runs-on: ubuntu-latest
+    strategy:
+      matrix: { node: [20] }
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          cache: npm
+      - name: Install dependencies
+        run: npm ci
       - name: ESLint (no warnings)
         run: npm run lint:ci
+      - name: TypeScript typecheck
+        run: npm run typecheck
+        if: ${{ hashFiles('tsconfig.json') != '' }}
 
   test:
     needs: lint
     runs-on: ubuntu-latest
     strategy:
-      matrix:
-        node: [20]
+      matrix: { node: [20] }
     steps:
       - name: Checkout
         uses: actions/checkout@v4
-
       - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: npm
-
       - name: Install dependencies
         run: npm ci
-
-      - name: Unit tests (with coverage thresholds)
+      - name: Unit tests (with coverage)
         run: npm run coverage
-
       - name: Upload coverage HTML
         if: always()
         uses: actions/upload-artifact@v4
@@ -60,7 +69,6 @@ jobs:
           name: coverage-html-node-${{ matrix.node }}
           path: coverage
           if-no-files-found: warn
-
       - name: Upload coverage to Codecov
         uses: codecov/codecov-action@v4
         with:
