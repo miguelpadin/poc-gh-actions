@@ -1,0 +1,9 @@
+#!/usr/bin/env sh
+. "$(dirname -- "$0")/_/husky.sh"
+set -e
+
+echo "› Prettier check"
+npm run format:check
+
+echo "› ESLint (CI policy: max-warnings=0)"
+npm run lint:ci

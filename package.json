@@ -16,7 +16,8 @@
     "test:coverage": "vitest --coverage",
     "coverage": "vitest run --coverage",
     "lint:ci": "eslint . --max-warnings=0",
-    "typecheck": "tsc --noEmit"
+    "typecheck": "tsc --noEmit",
+    "prepare": "husky"
   },
   "dependencies": {
     "vue": "^3.5.22"
@@ -32,6 +33,7 @@
     "eslint-config-prettier": "^10.1.8",
     "eslint-plugin-vue": "^10.5.1",
     "happy-dom": "^20.0.10",
+    "husky": "^9.1.7",
     "prettier": "^3.6.2",
     "typescript": "~5.9.3",
     "typescript-eslint": "^8.46.3",
