@@ -16,3 +16,4 @@ The GitHub Actions workflow runs the following steps, in order:
 > For dynamic coverage per commit/PR, integrate **Codecov** or **Coveralls** later.
 
 <!-- husky test -->
+<!-- husky v9 check -->
