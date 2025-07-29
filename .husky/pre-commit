@@ -1,6 +1,3 @@
 set -e
-echo "› Prettier write"
-npm run format
-git add -A
-echo "› ESLint (no warnings)"
-npm run lint:ci
+echo "› lint-staged (prettier + eslint on staged files)"
+npx lint-staged
