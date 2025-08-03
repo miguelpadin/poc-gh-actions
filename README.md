@@ -11,4 +11,3 @@ The GitHub Actions workflow runs the following steps, in order:
 2. **ESLint without warnings** (`npm run lint:ci`)
 3. **Unit tests** (Vitest + Vue Test Utils + happy-dom)
 4. **Coverage report** (V8) with HTML output uploaded as an artifact
-<!-- trigger:ci -->
