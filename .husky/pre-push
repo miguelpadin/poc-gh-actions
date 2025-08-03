@@ -1,0 +1,4 @@
+#!/usr/bin/env sh
+set -e
+echo "› Running unit tests (non-interactive)"
+npm run test:run

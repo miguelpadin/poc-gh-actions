@@ -1,3 +1,11 @@
+#!/usr/bin/env sh
 set -e
-echo "› lint-staged (prettier + eslint on staged files)"
-npx lint-staged
+
+echo "› Prettier check (no write)"
+npm run format:check
+
+echo "› ESLint check (no fix, no warnings)"
+npm run lint:ci
+
+echo "› Unit tests (non-interactive)"
+npm run test:run

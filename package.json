@@ -17,7 +17,8 @@
     "coverage": "vitest run --coverage",
     "lint:ci": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
-    "prepare": "husky"
+    "prepare": "husky",
+    "test:run": "vitest run"
   },
   "dependencies": {
     "vue": "^3.5.22"
