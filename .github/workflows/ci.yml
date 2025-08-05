@@ -8,46 +8,53 @@ on:
 
 jobs:
   format:
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix: { node: [20] }
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: npm
+
       - name: Install dependencies
         run: npm ci
+
       - name: Prettier check
         run: npm run format:check
 
   lint:
     needs: format
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix: { node: [20] }
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Use Node.js ${{ matrix.node }}
         uses: actions/setup-node@v4
         with:
           node-version: ${{ matrix.node }}
           cache: npm
+
       - name: Install dependencies
         run: npm ci
-      - name: ESLint (no warnings)
+
+      - name: ESLint (no warnings allowed)
         run: npm run lint:ci
+
       - name: TypeScript typecheck
-        run: npm run typecheck
         if: ${{ hashFiles('tsconfig.json') != '' }}
+        run: npm run typecheck
 
   unit:
     needs: lint
-    runs-on: ubuntu-latest
+    runs-on: ubuntu-24.04
     strategy:
       matrix: { node: [20] }
     steps:
@@ -60,9 +67,9 @@ jobs:
           cache: npm
       - name: Install dependencies
         run: npm ci
-      - name: Unit tests (with coverage)
+      - name: Run unit tests with coverage
         run: npm run coverage
-      - name: Upload coverage HTML
+      - name: Upload coverage HTML artifact
         if: always()
         uses: actions/upload-artifact@v4
         with:
@@ -75,43 +82,37 @@ jobs:
           files: ./coverage/clover.xml
           token: ${{ secrets.CODECOV_TOKEN }}
           fail_ci_if_error: true
+
   e2e:
-    name: E2E (Playwright)
-    runs-on: ubuntu-latest
     needs: unit
+    runs-on: ubuntu-24.04
     steps:
-      - uses: actions/checkout@v4
-
-      - uses: actions/setup-node@v4
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Use Node.js 20
+        uses: actions/setup-node@v4
         with:
-          node-version: "20"
+          node-version: 20
           cache: npm
-
-      - run: npm ci
-
-      - name: Install Playwright browsers
-        uses: microsoft/playwright-github-action@v1
-
-      - name: Build app
-        run: npm run build
-
+      - name: Install dependencies
+        run: npm ci
+      # The old microsoft/playwright-github-action is deprecated.
+      # Playwright recommends installing browsers and system dependencies via CLI.
+      - name: Install Playwright browsers and system dependencies
+        run: npx playwright install --with-deps
+      # Start the Vite preview server in the background.
       - name: Start preview server
         run: |
-          npm run preview:test & echo $! > server.pid
-          npx wait-on http://127.0.0.1:5173
-
-      - name: Run Playwright
+          npm run preview:test &
+          echo $! > preview.pid
+      # Wait until the dev server is reachable before running tests.
+      - name: Wait for preview server
+        run: npx wait-on http://localhost:5173
+      # Run Playwright E2E tests.
+      - name: Run Playwright tests
         run: npm run test:e2e
-
-      - name: Upload Playwright report
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: playwright-report
-          path: playwright-report
-          if-no-files-found: ignore
-
+      # Ensure the preview server is stopped even if tests fail.
       - name: Stop preview server
         if: always()
         run: |
-          if [ -f server.pid ]; then kill $(cat server.pid) || true; fi
+          if [ -f preview.pid ]; then kill $(cat preview.pid) || true; fi
