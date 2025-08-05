@@ -11,20 +11,27 @@
     "format:check": "prettier --check .",
     "lint": "eslint .",
     "lint:fix": "eslint . --fix",
+    "lint:ci": "eslint . --max-warnings=0",
     "test": "vitest",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest --coverage",
     "coverage": "vitest run --coverage",
-    "lint:ci": "eslint . --max-warnings=0",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
-    "test:run": "vitest run"
+    "test:run": "vitest run",
+    "test:e2e:dev": "vite preview --port 5173",
+    "e2e:run": "npm run preview:test & SERVER_PID=$! && npx wait-on http://localhost:5173 && npm run test:e2e && kill $SERVER_PID",
+    "preview:test": "vite preview --port 5173 --strictPort --host",
+    "test:e2e": "playwright test -c playwright.config.ts",
+    "e2e:headed": "playwright test -c playwright.config.ts --headed --project=chromium",
+    "test:all": "npm run test && npm run test:e2e"
   },
   "dependencies": {
     "vue": "^3.5.22"
   },
   "devDependencies": {
     "@eslint/js": "^9.39.1",
+    "@playwright/test": "^1.56.1",
     "@types/node": "^24.6.0",
     "@vitejs/plugin-vue": "^6.0.1",
     "@vitest/coverage-v8": "^4.0.8",
@@ -43,7 +50,8 @@
     "vite-plugin-eslint": "^1.8.1",
     "vitest": "^4.0.8",
     "vue-eslint-parser": "^10.2.0",
-    "vue-tsc": "^3.1.0"
+    "vue-tsc": "^3.1.0",
+    "wait-on": "^9.0.1"
   },
   "engines": {
     "node": ">=20"
