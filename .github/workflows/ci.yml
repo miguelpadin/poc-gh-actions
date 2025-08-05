@@ -86,33 +86,24 @@ jobs:
   e2e:
     needs: unit
     runs-on: ubuntu-24.04
+    timeout-minutes: 20
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Use Node.js 20
         uses: actions/setup-node@v4
         with:
-          node-version: 20
-          cache: npm
+          node-version: "20"
+          cache: "npm"
+
       - name: Install dependencies
         run: npm ci
-      # The old microsoft/playwright-github-action is deprecated.
-      # Playwright recommends installing browsers and system dependencies via CLI.
-      - name: Install Playwright browsers and system dependencies
+
+      # Install Playwright browsers + system deps (no deprecated action)
+      - name: Install Playwright (browsers + system deps)
         run: npx playwright install --with-deps
-      # Start the Vite preview server in the background.
-      - name: Start preview server
-        run: |
-          npm run preview:test &
-          echo $! > preview.pid
-      # Wait until the dev server is reachable before running tests.
-      - name: Wait for preview server
-        run: npx wait-on http://localhost:5173
-      # Run Playwright E2E tests.
-      - name: Run Playwright tests
+
+      # Playwright will start/await/stop the preview server via webServer config
+      - name: Run E2E tests (Playwright)
         run: npm run test:e2e
-      # Ensure the preview server is stopped even if tests fail.
-      - name: Stop preview server
-        if: always()
-        run: |
-          if [ -f preview.pid ]; then kill $(cat preview.pid) || true; fi

@@ -1,18 +1,20 @@
-// eslint.config.js
 import js from "@eslint/js";
 import tseslint from "typescript-eslint";
 import vue from "eslint-plugin-vue";
 import vueParser from "vue-eslint-parser";
-// Desactiva reglas que chocan con Prettier
 import eslintConfigPrettier from "eslint-config-prettier";
 
 export default [
-  // Ignorados (sustituye .eslintignore)
   {
-    ignores: ["dist/**", "node_modules/**", "coverage/**"],
+    ignores: [
+      "dist/**",
+      "node_modules/**",
+      "coverage/**",
+      "playwright-report/**",
+      "test-results/**",
+    ],
   },
 
-  // Archivos .vue con parser de Vue y TS interno
   {
     files: ["**/*.vue"],
     languageOptions: {
@@ -25,7 +27,6 @@ export default [
     },
   },
 
-  // Archivos TS/JS
   {
     files: ["**/*.{ts,js}"],
     languageOptions: {
@@ -39,7 +40,6 @@ export default [
   ...tseslint.configs.recommended,
   ...vue.configs["flat/strongly-recommended"],
 
-  // Ajustes finos del proyecto
   {
     rules: {
       "no-undef": "off",
@@ -47,6 +47,5 @@ export default [
     },
   },
 
-  // ¡Muy importante! Colocar al FINAL
   eslintConfigPrettier,
 ];

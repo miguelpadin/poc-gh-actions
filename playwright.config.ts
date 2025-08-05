@@ -4,14 +4,15 @@ import { defineConfig } from "@playwright/test";
 export default defineConfig({
   testDir: "e2e",
   use: {
-    baseURL: "http://localhost:5173", // ahora `page.goto('/')` funciona
+    // Así `page.goto("/")` funciona tanto en local como en CI
+    baseURL: process.env.PLAYWRIGHT_BASE_URL ?? "http://localhost:5173",
     headless: true,
   },
+  // Playwright levanta y espera al server (Vite preview)
   webServer: {
-    // construye y sirve la app en modo preview
-    command: "npm run preview:test",
+    command: "npm run preview:test", // debe existir en package.json
     url: "http://localhost:5173",
-    reuseExistingServer: !process.env.CI, // en local, reutiliza si ya está levantado
-    timeout: 60_000,
+    reuseExistingServer: !process.env.CI, // en local reutiliza; en CI no
+    timeout: 120_000, // 2 min
   },
 });
