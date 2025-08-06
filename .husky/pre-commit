@@ -2,7 +2,7 @@
 set -e
 
 echo "› Prettier check (no write)"
-npm run format:check
+npm run format:ci
 
 echo "› ESLint check (no fix, no warnings)"
 npm run lint:ci
