@@ -100,10 +100,11 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      # Install Playwright browsers + system deps (no deprecated action)
+      - name: Build app for preview
+        run: npm run build
+
       - name: Install Playwright (browsers + system deps)
         run: npx playwright install --with-deps
 
-      # Playwright will start/await/stop the preview server via webServer config
       - name: Run E2E tests (Playwright)
         run: npm run test:e2e

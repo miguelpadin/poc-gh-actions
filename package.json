@@ -21,10 +21,11 @@
     "test:run": "vitest run",
     "test:e2e:dev": "vite preview --port 5173",
     "e2e:run": "npm run preview:test & SERVER_PID=$! && npx wait-on http://localhost:5173 && npm run test:e2e && kill $SERVER_PID",
-    "preview:test": "vite preview --port 5173 --strictPort --host",
     "test:e2e": "playwright test -c playwright.config.ts",
     "e2e:headed": "playwright test -c playwright.config.ts --headed --project=chromium",
-    "test:all": "npm run test && npm run test:e2e"
+    "test:all": "npm run test && npm run test:e2e",
+    "prepreview:test": "vite build",
+    "preview:test": "vite preview --port 5173 --strictPort --host"
   },
   "dependencies": {
     "vue": "^3.5.22"
