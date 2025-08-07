@@ -11,7 +11,6 @@
     "format:ci": "prettier --check .",
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint . --max-warnings=0",
-    "test": "vitest",
     "test:run": "vitest run",
     "test:watch": "vitest --watch",
     "coverage": "vitest run --coverage",
