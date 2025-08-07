@@ -13,11 +13,11 @@
     "lint:ci": "eslint . --max-warnings=0",
     "test:run": "vitest run",
     "test:watch": "vitest --watch",
-    "coverage": "vitest run --coverage",
+    "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
     "prepare": "husky",
     "test:e2e": "playwright test -c playwright.config.ts",
-    "e2e:headed": "playwright test -c playwright.config.ts --headed --project=chromium",
+    "test:e2e:headed": "playwright test -c playwright.config.ts --headed",
     "prepreview:test": "vite build",
     "preview:test": "vite preview --port 5173 --strictPort --host"
   },
