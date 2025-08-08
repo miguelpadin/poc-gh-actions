@@ -1,10 +1,11 @@
 # poc-gh-actions
 
-![Node](https://img.shields.io/badge/node-20.x-green)
-![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4)
-![eslint](https://img.shields.io/badge/lint-eslint-blueviolet)
-![husky](https://img.shields.io/badge/hooks-husky-7D3EA5)
-![GitHub last commit](https://img.shields.io/github/last-commit/miguelpadin/poc-gh-actions)
+![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?logo=nodedotjs&logoColor=white)
+![Vue](https://img.shields.io/badge/Vue-3.x-gray?logo=vuedotjs&logoColor=42b883)
+![Prettier](https://img.shields.io/badge/Prettier-Enabled-F7B93E?logo=prettier&logoColor=white)
+![ESLint](https://img.shields.io/badge/ESLint-Strict-4B32C3?logo=eslint&logoColor=white)
+![Husky](https://img.shields.io/badge/Husky-Git%20Hooks-000000?logo=husky&logoColor=white)
+![GitHub last commit](https://img.shields.io/github/last-commit/miguelpadin/poc-gh-actions?logo=git&logoColor=white)
 ![CI](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/gh/miguelpadin/poc-gh-actions/branch/main/graph/badge.svg)](https://codecov.io/gh/miguelpadin/poc-gh-actions)
 
@@ -16,18 +17,47 @@ The repository is intentionally simple to keep the focus on the DevOps pipeline,
 ## ✅ Features
 
 - **Vue 3 + Vite 7** development environment
-- **Vitest 4** unit testing with **V8 coverage**
-- **Codecov** integration (Clover reporter)
+- **TypeScript** using the recommended Vue configuration
+- **Vitest 4** unit testing with **V8 coverage** (HTML + Clover)
+- **Playwright** end-to-end testing (CI headless + local headed mode)
+- **ESLint** with Vue, TypeScript, and strict rules
+- **Prettier** for consistent formatting (local + CI check)
+- **Husky (v9)** Git hooks:
+  - **pre-commit**: Prettier check, ESLint check, and Vitest non-interactive tests
+  - **pre-push**: Playwright E2E tests before pushing
+- **TypeScript type checking** via `tsc --noEmit`
 - **GitHub Actions CI** running:
   - Node 20
-  - install → format → lint → typecheck → tests → coverage upload
-- **Prettier** for consistent code formatting
-- **ESLint** with Vue, TypeScript, and strict rules
-- **Husky (v9)** Git hooks:
-  - `pre-commit`: format check + ESLint check + Vitest tests
-  - `pre-push`: ensures tests always pass before pushing
-- **lint-staged**: only formats and lints changed files
-- **100% deterministic builds** via `npm ci`
+  - install → format → lint → typecheck → unit tests → coverage upload → E2E tests
+- **Codecov** integration (Clover reporter)
+- **Deterministic installs** via `npm ci`
+
+---
+
+## ⚙️ Scripts
+
+```bash
+npm run dev             # Start Vite dev server
+npm run build           # Build the application (vue-tsc + vite build)
+npm run preview         # Preview the production build
+
+npm run format:fix      # Apply Prettier formatting
+npm run format:ci       # Prettier check (used in CI and pre-commit)
+
+npm run lint:fix        # ESLint with autofix
+npm run lint:ci         # ESLint strict mode (no warnings allowed)
+
+npm run typecheck       # TypeScript type checking (tsc --noEmit)
+
+npm run test:run        # Unit tests (Vitest) in non-interactive mode
+npm run test:watch      # Unit tests in watch mode
+npm run test:coverage   # Unit tests with coverage (V8, HTML + clover)
+
+npm run test:e2e        # Playwright end-to-end tests (headless, CI-safe)
+npm run test:e2e:headed # Playwright in headed mode for debugging
+
+npm run preview:test    # Preview the built app for E2E tests (auto-builds before serving)
+```
 
 ---
 
