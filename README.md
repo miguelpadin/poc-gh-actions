@@ -1,5 +1,10 @@
 # poc-gh-actions
 
+![Format](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg?job=format)
+![Lint](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg?job=lint)
+![Unit](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg?job=unit)
+![E2E](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg?job=e2e)
+
 ![CI](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/gh/miguelpadin/poc-gh-actions/branch/main/graph/badge.svg)](https://codecov.io/gh/miguelpadin/poc-gh-actions)
 
