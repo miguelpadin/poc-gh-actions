@@ -4,7 +4,7 @@
 ![Lint](https://img.shields.io/github/checks-status/miguelpadin/poc-gh-actions/main?nameFilter=lint&label=Lint&logo=eslint&logoColor=white&labelColor=4B32C3)
 ![Unit](https://img.shields.io/github/checks-status/miguelpadin/poc-gh-actions/main?nameFilter=unit&label=Unit%20Tests&logo=vitest&logoColor=white&labelColor=6E9F18)
 ![E2E](https://img.shields.io/github/checks-status/miguelpadin/poc-gh-actions/main?nameFilter=e2e&label=E2E%20Tests&logo=playwright&logoColor=white&labelColor=2EAD33)
-![CI](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg)
+![CI](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg?branch=main)
 [![codecov](https://codecov.io/gh/miguelpadin/poc-gh-actions/branch/main/graph/badge.svg)](https://codecov.io/gh/miguelpadin/poc-gh-actions)
 
 A minimal Vue 3 + Vite project built specifically to explore and test GitHub Actions workflows (CI, tests, coverage, and automation).  
