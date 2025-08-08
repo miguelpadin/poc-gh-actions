@@ -1,11 +1,5 @@
 # poc-gh-actions
 
-![Node.js](https://img.shields.io/badge/Node.js-20.x-339933?logo=nodedotjs&logoColor=white)
-![Vue](https://img.shields.io/badge/Vue-3.x-gray?logo=vuedotjs&logoColor=42b883)
-![Prettier](https://img.shields.io/badge/Prettier-Enabled-F7B93E?logo=prettier&logoColor=white)
-![ESLint](https://img.shields.io/badge/ESLint-Strict-4B32C3?logo=eslint&logoColor=white)
-![Husky](https://img.shields.io/badge/Husky-Git%20Hooks-000000?logo=husky&logoColor=white)
-![GitHub last commit](https://img.shields.io/github/last-commit/miguelpadin/poc-gh-actions?logo=git&logoColor=white)
 ![CI](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg)
 [![codecov](https://codecov.io/gh/miguelpadin/poc-gh-actions/branch/main/graph/badge.svg)](https://codecov.io/gh/miguelpadin/poc-gh-actions)
 
