@@ -5,5 +5,3 @@ export function sum(a: number, b: number): number {
 export function isEven(n: number): boolean {
   return n % 2 === 0;
 }
-/* lint-staged check */
-// test pre-push
