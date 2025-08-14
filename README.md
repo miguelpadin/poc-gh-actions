@@ -6,8 +6,16 @@
 A minimal Vue 3 + Vite project built specifically to explore and test GitHub Actions workflows (CI, tests, coverage, and automation).  
 The repository is intentionally simple to keep the focus on the DevOps pipeline, tooling, and quality controls.
 
+```mermaid
 flowchart LR
-A["format"] --> B["lint"] --> C["unit"] --> D["e2e"]
+  A["format"]
+  B["lint & type checks"]
+  C["unit"]
+  D["e2e"]
+
+  A --> B --> C --> D
+
+```
 
 ---
 
