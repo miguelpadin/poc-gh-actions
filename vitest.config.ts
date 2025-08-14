@@ -12,7 +12,8 @@ export default defineConfig({
       reporter: ["text", "html", "clover"],
       reportsDirectory: "coverage",
       all: true,
-      include: ["src/**/*.{ts,vue}"],
+      include: ["src/**/*.{ts}"],
+      exclude: ["src/main.ts"],
     },
   },
 });
