@@ -1,7 +1,7 @@
 # poc-gh-actions
 
 ![CI](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg?branch=main)
-[![codecov](https://codecov.io/gh/miguelpadin/poc-gh-actions/branch/main/graphs/badge.svg)](https://codecov.io/gh/miguelpadin/poc-gh-actions)
+[![codecov](https://codecov.io/gh/miguelpadin/poc-gh-actions/branch/main/graph/badge.svg)](https://codecov.io/gh/miguelpadin/poc-gh-actions)
 
 A minimal Vue 3 + Vite project built specifically to explore and test GitHub Actions workflows (CI, tests, coverage, and automation).  
 The repository is intentionally simple to keep the focus on the DevOps pipeline, tooling, and quality controls.
