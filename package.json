@@ -15,6 +15,7 @@
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
     "typecheck": "tsc --noEmit",
+    "typecheck:build": "tsc -p tsconfig.build.json",
     "prepare": "husky",
     "test:e2e": "playwright test -c playwright.config.ts",
     "test:e2e:headed": "playwright test -c playwright.config.ts --headed",

@@ -1,0 +1,12 @@
+{
+  "extends": "./tsconfig.json",
+  "compilerOptions": {
+    "composite": true,
+    "noEmit": false,
+    "emitDeclarationOnly": true,
+    "declaration": true,
+    "declarationMap": true,
+    "outDir": "types"
+  },
+  "exclude": ["node_modules", "dist", "coverage", "**/*.test.ts", "**/*.spec.ts", "e2e"]
+}
