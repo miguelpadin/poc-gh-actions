@@ -100,11 +100,17 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Build app for preview
-        run: npm run build
+      - name: Cache Playwright browsers
+        uses: actions/cache@v4
+        with:
+          path: ~/.cache/ms-playwright
+          key: playwright-${{ runner.os }}-${{ hashFiles('package-lock.json') }}
 
       - name: Install Playwright (browsers + deps)
         run: npx playwright install --with-deps
+
+      - name: Build app for preview
+        run: npm run build
 
       - name: Run E2E tests
         run: npm run test:e2e
