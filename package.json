@@ -11,16 +11,16 @@
     "format:ci": "prettier --check .",
     "lint:fix": "eslint . --fix",
     "lint:ci": "eslint . --max-warnings=0",
+    "typecheck": "tsc --noEmit",
+    "typecheck:build": "tsc -p tsconfig.build.json",
     "test:run": "vitest run",
     "test:watch": "vitest --watch",
     "test:coverage": "vitest run --coverage",
-    "typecheck": "tsc --noEmit",
-    "typecheck:build": "tsc -p tsconfig.build.json",
-    "prepare": "husky",
     "test:e2e": "playwright test -c playwright.config.ts",
     "test:e2e:headed": "playwright test -c playwright.config.ts --headed",
-    "prepreview:test": "vite build",
-    "preview:test": "vite preview --port 5173 --strictPort --host"
+    "preview:test": "vite preview --port 5173 --strictPort --host",
+    "prepare": "husky",
+    "prepreview:test": "vite build"
   },
   "dependencies": {
     "vue": "^3.5.22"
