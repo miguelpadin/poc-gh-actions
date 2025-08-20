@@ -44,6 +44,7 @@ npm run lint:fix        # ESLint with autofix
 npm run lint:ci         # ESLint strict mode (no warnings allowed)
 
 npm run typecheck       # TypeScript type checking (tsc --noEmit)
+npm run typecheck:build # Legacy script: used a separate tsconfig.build.json for library-style builds; not needed in this Vite app
 
 npm run test:run        # Unit tests (Vitest) in non-interactive mode
 npm run test:watch      # Unit tests in watch mode
@@ -52,7 +53,12 @@ npm run test:coverage   # Unit tests with coverage (V8, HTML + clover)
 npm run test:e2e        # Playwright end-to-end tests (headless, CI-safe)
 npm run test:e2e:headed # Playwright in headed mode for debugging
 
+npm run prepreview:test # Build the app before preview:test (Vite production build)
 npm run preview:test    # Preview the built app for E2E tests (auto-builds before serving)
+
+npm run prepare         # Install Husky Git hooks (runs automatically after npm install)
+
+
 ```
 
 ---
