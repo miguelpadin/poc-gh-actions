@@ -19,9 +19,9 @@ Its goal is to showcase a clean, modular CI/CD setup using GitHub Actions, quali
 
 ```mermaid
 graph TD
-  A[format<br/>Prettier check] --> B[lint<br/>ESLint + typecheck]
-  B --> C[unit<br/>Vitest + coverage + Codecov]
-  C --> D[e2e<br/>Build + Playwright]
+  A[format<br/>Prettier check] --> B[lint<br/>ESLint + typecheck<br/>Node 20 & 22]
+  B --> C[unit<br/>Vitest + coverage<br/>Node 20 & 22]
+  C --> D[e2e<br/>Build + Playwright<br/>Node 20]
 ```
 
 ---
@@ -31,16 +31,14 @@ graph TD
 The CI pipeline enforces several quality gates:
 
 - Prettier formatting must pass
-
 - ESLint strict mode allows zero warnings
-
-- TypeScript must compile without errors (tsc --noEmit)
-
+- TypeScript must compile without errors (`tsc --noEmit`)
 - Unit tests must pass with V8 coverage enabled
-
 - E2E tests must succeed in a headless CI environment
-
 - Coverage is uploaded to Codecov (Clover reporter)
+- The pipeline runs linting and unit tests on a Node.js version matrix (20 and 22)
+- Coverage upload and Codecov reporting are executed only on Node 20 to avoid duplication
+- Concurrency is enforced so only one CI run per branch executes at a time
 
 Any failure stops the pipeline immediately.
 
@@ -90,10 +88,18 @@ The workflow can also be triggered manually via workflow_dispatch
   - **pre-push**: Playwright E2E tests before pushing
 - **TypeScript type checking** via `tsc --noEmit`
 - **GitHub Actions CI** running:
-  - Node 20
-  - install → format → lint → typecheck → unit tests → coverage upload → E2E tests
+  - Node 20 & 22 (matrix for lint + unit jobs)
+  - install → format → lint → typecheck → unit tests → coverage upload (Node 20) → E2E tests
+  - Concurrency enabled to cancel redundant runs
 - **Codecov** integration (Clover reporter)
 - **Deterministic installs** via `npm ci`
+
+---
+
+### ⚡ Concurrency
+
+The CI pipeline uses GitHub Actions concurrency groups to ensure that only one run per branch executes at a time.  
+Any new push cancels the previous in-progress workflow, keeping CI fast and avoiding stale results.
 
 ---
 
