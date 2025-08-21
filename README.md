@@ -17,35 +17,11 @@ Its goal is to showcase a clean, modular CI/CD setup using GitHub Actions, quali
 
 ## 🏗️ CI Pipeline Overview
 
-```
-
-┌───────────┐
-│ Formatting│ Prettier (format:ci)
-└─────┬─────┘
-      ▼
-┌──────────┐
-│ Linting  │ ESLint strict (lint:ci)
-└─────┬────┘
-      ▼
-┌────────────┐
-│ Type Check │ tsc --noEmit
-└─────┬──────┘
-      ▼
-┌─────────────────┐
-│ Unit Tests      │ Vitest (test:run / coverage)
-└─────┬───────────┘
-      ▼
-┌──────────────────────┐
-│ Coverage Upload      │ Codecov (Clover)
-└─────┬────────────────┘
-      ▼
-┌────────────────┐
-│ E2E Tests      │ Playwright (CI headless)
-└─────┬──────────┘
-      ▼
-┌─────────────────────┐
-│ Release (on tag)    │ v*.*.\* → GitHub Release
-└─────────────────────┘
+```mermaid
+graph TD
+  A[format<br/>Prettier check] --> B[lint<br/>ESLint + typecheck]
+  B --> C[unit<br/>Vitest + coverage + Codecov]
+  C --> D[e2e<br/>Build + Playwright]
 ```
 
 ---
@@ -85,15 +61,18 @@ The workflow can also be triggered manually via workflow_dispatch
 
 ## 📁 Project Structure
 
-```
+```Python
 /
-├─ src/ # Application source code
-├─ **tests**/ # Unit tests (Vitest)
-├─ e2e/ # Playwright tests
-├─ .github/workflows/ # CI/CD pipelines
-├─ tsconfig.json
-├─ vite.config.ts
-└─ playwright.config.ts
+├─ .github/             # GitHub Actions workflows and related config
+├─ .husky/              # Husky Git hooks
+├─ coverage/            # Vitest coverage reports (generated)
+├─ dist/                # Production build output (generated)
+├─ e2e/                 # Playwright end-to-end tests
+├─ node_modules/        # Project dependencies (generated)
+├─ playwright-report/   # Playwright HTML reports (generated)
+├─ public/              # Static assets served by Vite
+├─ src/                 # Application source code
+└─ test-results/        # Test result artifacts (generated)
 ```
 
 ---
