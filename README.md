@@ -28,7 +28,7 @@ graph TD
 
 ## 🛡️ Quality Gates
 
-- The CI pipeline enforces several quality gates:
+The CI pipeline enforces several quality gates:
 
 - Prettier formatting must pass
 
