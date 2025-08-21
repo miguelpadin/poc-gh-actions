@@ -3,10 +3,98 @@
 ![CI](https://github.com/miguelpadin/poc-gh-actions/actions/workflows/ci.yml/badge.svg?branch=main)
 [![codecov](https://codecov.io/gh/miguelpadin/poc-gh-actions/branch/main/graph/badge.svg)](https://codecov.io/gh/miguelpadin/poc-gh-actions)
 
-A minimal Vue 3 + Vite project built specifically to explore and test GitHub Actions workflows (CI, tests, coverage, and automation).  
+A Vue 3 + Vite project built specifically to explore and test GitHub Actions workflows (CI, tests, coverage, and automation).  
 The repository is intentionally simple to keep the focus on the DevOps pipeline, tooling, and quality controls.
 
-format → lint → unit → e2e
+---
+
+## 🎯 Purpose
+
+This repository is intentionally minimal.
+Its goal is to showcase a clean, modular CI/CD setup using GitHub Actions, quality gates, automated testing, and release workflows.
+
+---
+
+## 🏗️ CI Pipeline Overview
+
+```
+
+┌───────────┐
+│ Formatting│ Prettier (format:ci)
+└─────┬─────┘
+      ▼
+┌──────────┐
+│ Linting  │ ESLint strict (lint:ci)
+└─────┬────┘
+      ▼
+┌────────────┐
+│ Type Check │ tsc --noEmit
+└─────┬──────┘
+      ▼
+┌─────────────────┐
+│ Unit Tests      │ Vitest (test:run / coverage)
+└─────┬───────────┘
+      ▼
+┌──────────────────────┐
+│ Coverage Upload      │ Codecov (Clover)
+└─────┬────────────────┘
+      ▼
+┌────────────────┐
+│ E2E Tests      │ Playwright (CI headless)
+└─────┬──────────┘
+      ▼
+┌─────────────────────┐
+│ Release (on tag)    │ v*.*.\* → GitHub Release
+└─────────────────────┘
+```
+
+---
+
+## 🛡️ Quality Gates
+
+- The CI pipeline enforces several quality gates:
+
+- Prettier formatting must pass
+
+- ESLint strict mode allows zero warnings
+
+- TypeScript must compile without errors (tsc --noEmit)
+
+- Unit tests must pass with V8 coverage enabled
+
+- E2E tests must succeed in a headless CI environment
+
+- Coverage is uploaded to Codecov (Clover reporter)
+
+Any failure stops the pipeline immediately.
+
+---
+
+## 🚀 Release Workflow
+
+This repository includes a release pipeline triggered by semantic version tags (v*.*.\*).
+When a tag is pushed:
+
+- A GitHub Release is generated
+
+- Release notes are automatically created
+
+The workflow can also be triggered manually via workflow_dispatch
+
+---
+
+## 📁 Project Structure
+
+```
+/
+├─ src/ # Application source code
+├─ **tests**/ # Unit tests (Vitest)
+├─ e2e/ # Playwright tests
+├─ .github/workflows/ # CI/CD pipelines
+├─ tsconfig.json
+├─ vite.config.ts
+└─ playwright.config.ts
+```
 
 ---
 
@@ -57,8 +145,19 @@ npm run prepreview:test # Build the app before preview:test (Vite production bui
 npm run preview:test    # Preview the built app for E2E tests (auto-builds before serving)
 
 npm run prepare         # Install Husky Git hooks (runs automatically after npm install)
+```
 
+---
 
+## 🧪 Reproducing CI Locally
+
+```bash
+npm ci
+npm run format:ci
+npm run lint:ci
+npm run typecheck
+npm run test:coverage
+npm run test:e2e
 ```
 
 ---
