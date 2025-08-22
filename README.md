@@ -6,14 +6,10 @@
 A Vue 3 + Vite project built specifically to explore and test GitHub Actions workflows (CI, tests, coverage, and automation).  
 The repository is intentionally simple to keep the focus on the DevOps pipeline, tooling, and quality controls.
 
----
-
 ## 🎯 Purpose
 
 This repository is intentionally minimal.
 Its goal is to showcase a clean, modular CI/CD setup using GitHub Actions, quality gates, automated testing, and release workflows.
-
----
 
 ## 🏗️ CI Pipeline Overview
 
@@ -24,8 +20,6 @@ graph TD
   C --> D[e2e<br/>Build + Playwright<br/>Node 20]
   D --> E[deploy<br/>GitHub Pages]
 ```
-
----
 
 ## 🛡️ Quality Gates
 
@@ -43,8 +37,6 @@ The CI pipeline enforces several quality gates:
 
 Any failure stops the pipeline immediately.
 
----
-
 ## 🚀 Release Workflow
 
 This repository includes a release pipeline triggered by semantic version tags (v*.*.\*)
@@ -55,8 +47,6 @@ When a tag is pushed:
 - Release notes are automatically created
 
 The workflow can also be triggered manually via workflow_dispatch
-
----
 
 ## 📁 Project Structure
 
@@ -73,8 +63,6 @@ The workflow can also be triggered manually via workflow_dispatch
 ├─ src/                 # Application source code
 └─ test-results/        # Test result artifacts (generated)
 ```
-
----
 
 ## ✅ Features
 
@@ -99,14 +87,10 @@ The workflow can also be triggered manually via workflow_dispatch
 - **CodeQL security scanning** for static code analysis and vulnerability detection
 - **Live demo** automatically deployed to GitHub Pages on every successful CI run
 
----
-
 ### ⚡ Concurrency
 
 The CI pipeline uses GitHub Actions concurrency groups to ensure that only one run per branch executes at a time.  
 Any new push cancels the previous in-progress workflow, keeping CI fast and avoiding stale results.
-
----
 
 ## 🔍 Dependency Review
 
@@ -118,14 +102,10 @@ Pull requests automatically run GitHub’s dependency review analysis to detect:
 
 This check helps maintain security and reliability in the dependency tree.
 
----
-
 ## 🔒 CodeQL Security Scanning
 
 This repository includes GitHub's CodeQL analysis to detect security vulnerabilities and maintain code quality.  
 Results are available under **Security → Code scanning alerts** in the repository.
-
----
 
 ## 🌐 Deployment (GitHub Pages)
 
@@ -147,8 +127,6 @@ This ensures that every successful main-branch build is always live and up-to-da
 The latest successful build is automatically deployed to GitHub Pages:
 
 🔗 https://miguelpadin.github.io/poc-gh-actions/
-
----
 
 ## ⚙️ Scripts
 
@@ -179,8 +157,6 @@ npm run preview:test    # Preview the built app for E2E tests (auto-builds befor
 npm run prepare         # Install Husky Git hooks (runs automatically after npm install)
 ```
 
----
-
 ## 🧪 Reproducing CI Locally
 
 ```bash
@@ -191,8 +167,6 @@ npm run typecheck
 npm run test:coverage
 npm run test:e2e
 ```
-
----
 
 ## 📄 License
 
