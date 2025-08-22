@@ -97,6 +97,7 @@ The workflow can also be triggered manually via workflow_dispatch
 - **Deterministic installs** via `npm ci`
 - **Dependency Review** on pull requests to detect vulnerable or risky dependency changes
 - **CodeQL security scanning** for static code analysis and vulnerability detection
+- **Live demo** automatically deployed to GitHub Pages on every successful CI run
 
 ---
 
@@ -139,7 +140,13 @@ The deployment flow:
 4. The build artifact (`dist/`) is uploaded using `upload-pages-artifact`
 5. GitHub Pages publishes the site automatically
 
-This ensures that every successful main-branch build is always live and up-to-date.
+## This ensures that every successful main-branch build is always live and up-to-date.
+
+## 🚀 Live Demo
+
+The latest successful build is automatically deployed to GitHub Pages:
+
+🔗 https://miguelpadin.github.io/poc-gh-actions/
 
 ---
 
