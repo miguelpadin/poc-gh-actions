@@ -46,7 +46,8 @@ Any failure stops the pipeline immediately.
 
 ## 🚀 Release Workflow
 
-This repository includes a release pipeline triggered by semantic version tags (v*.*.\*).
+This repository includes a release pipeline triggered by semantic version tags (v*.*.\*)
+
 When a tag is pushed:
 
 - A GitHub Release is generated
@@ -93,6 +94,7 @@ The workflow can also be triggered manually via workflow_dispatch
   - Concurrency enabled to cancel redundant runs
 - **Codecov** integration (Clover reporter)
 - **Deterministic installs** via `npm ci`
+- **Dependency Review** on pull requests to detect vulnerable or risky dependency changes
 
 ---
 
@@ -100,6 +102,18 @@ The workflow can also be triggered manually via workflow_dispatch
 
 The CI pipeline uses GitHub Actions concurrency groups to ensure that only one run per branch executes at a time.  
 Any new push cancels the previous in-progress workflow, keeping CI fast and avoiding stale results.
+
+---
+
+## 🔍 Dependency Review
+
+Pull requests automatically run GitHub’s dependency review analysis to detect:
+
+- vulnerable dependency upgrades
+- licensing issues
+- dependency chain risks
+
+This check helps maintain security and reliability in the dependency tree.
 
 ---
 
