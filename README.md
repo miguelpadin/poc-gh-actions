@@ -51,7 +51,6 @@ This repository includes a release pipeline triggered by semantic version tags (
 When a tag is pushed:
 
 - A GitHub Release is generated
-
 - Release notes are automatically created
 
 The workflow can also be triggered manually via workflow_dispatch
@@ -95,6 +94,7 @@ The workflow can also be triggered manually via workflow_dispatch
 - **Codecov** integration (Clover reporter)
 - **Deterministic installs** via `npm ci`
 - **Dependency Review** on pull requests to detect vulnerable or risky dependency changes
+- **CodeQL security scanning** for static code analysis and vulnerability detection
 
 ---
 
@@ -114,6 +114,13 @@ Pull requests automatically run GitHub’s dependency review analysis to detect:
 - dependency chain risks
 
 This check helps maintain security and reliability in the dependency tree.
+
+---
+
+## 🔒 CodeQL Security Scanning
+
+This repository includes GitHub's CodeQL analysis to detect security vulnerabilities and maintain code quality.  
+Results are available under **Security → Code scanning alerts** in the repository.
 
 ---
 
