@@ -140,7 +140,7 @@ The deployment flow:
 4. The build artifact (`dist/`) is uploaded using `upload-pages-artifact`
 5. GitHub Pages publishes the site automatically
 
-## This ensures that every successful main-branch build is always live and up-to-date.
+This ensures that every successful main-branch build is always live and up-to-date.
 
 ## 🚀 Live Demo
 
