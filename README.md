@@ -19,9 +19,10 @@ Its goal is to showcase a clean, modular CI/CD setup using GitHub Actions, quali
 
 ```mermaid
 graph TD
-  A[format<br/>Prettier check] --> B[lint<br/>ESLint + typecheck<br/>Node 20 & 22]
+  A[format<br/>Prettier] --> B[lint<br/>ESLint + typecheck<br/>Node 20 & 22]
   B --> C[unit<br/>Vitest + coverage<br/>Node 20 & 22]
   C --> D[e2e<br/>Build + Playwright<br/>Node 20]
+  D --> E[deploy<br/>GitHub Pages]
 ```
 
 ---
@@ -91,6 +92,7 @@ The workflow can also be triggered manually via workflow_dispatch
   - Node 20 & 22 (matrix for lint + unit jobs)
   - install → format → lint → typecheck → unit tests → coverage upload (Node 20) → E2E tests
   - Concurrency enabled to cancel redundant runs
+  - Automatic deployment to GitHub Pages on successful CI completion
 - **Codecov** integration (Clover reporter)
 - **Deterministic installs** via `npm ci`
 - **Dependency Review** on pull requests to detect vulnerable or risky dependency changes
@@ -121,6 +123,23 @@ This check helps maintain security and reliability in the dependency tree.
 
 This repository includes GitHub's CodeQL analysis to detect security vulnerabilities and maintain code quality.  
 Results are available under **Security → Code scanning alerts** in the repository.
+
+---
+
+## 🌐 Deployment (GitHub Pages)
+
+This repository includes an automated deployment workflow.  
+Whenever the **CI workflow completes successfully on `main`**, the application is built and deployed to **GitHub Pages**.
+
+The deployment flow:
+
+1. CI passes all stages (format → lint → typecheck → unit → coverage → e2e)
+2. The `deploy.yml` workflow is triggered
+3. Vite builds the production bundle
+4. The build artifact (`dist/`) is uploaded using `upload-pages-artifact`
+5. GitHub Pages publishes the site automatically
+
+This ensures that every successful main-branch build is always live and up-to-date.
 
 ---
 
