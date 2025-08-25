@@ -87,7 +87,7 @@ The workflow can also be triggered manually via workflow_dispatch
 - **CodeQL security scanning** for static code analysis and vulnerability detection
 - **Live demo** automatically deployed to GitHub Pages on every successful CI run
 
-### ⚡ Concurrency
+## ⚡ Concurrency
 
 The CI pipeline uses GitHub Actions concurrency groups to ensure that only one run per branch executes at a time.  
 Any new push cancels the previous in-progress workflow, keeping CI fast and avoiding stale results.
